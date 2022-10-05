@@ -269,7 +269,7 @@ exports.LostPassword = async(req,res)=>{
         })
          }
         )
-        
+        console.log(codeDoc.length);
         if(codeDoc != null){
             console.log("Invalid code check your email !");
             return res.status(400).json("Invalid code check your email !");
