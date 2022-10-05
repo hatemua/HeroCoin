@@ -262,7 +262,7 @@ exports.LostPassword = async(req,res)=>{
     var key = email+"+-*/"+newPassword;
     try{
 
-        const k= new Promise((resolve, reject) => { 
+        const k= await new Promise((resolve, reject) => { 
              data.find({code:parseInt(code),email:email},function(err,doc)
         {
             resolve(doc);
