@@ -261,8 +261,10 @@ exports.LostPassword = async(req,res)=>{
     console.log(code);
     var key = email+"+-*/"+newPassword;
     try{
-        let codeDoc = await data.find({code:code,email:email});
-        let codeDoc1 = await data.find({});
+        let codeDoc = data.find({code:code,email:email}, function (err, newDoc) {   // Callback is optional
+            console.log(newDoc);
+          });
+        let codeDoc1 = data.find({});
         console.log(codeDoc);
         console.log(codeDoc1);
         if(codeDoc != null){
@@ -334,7 +336,9 @@ exports.getCode = async(req,res,next)=>{
             const html = fs.readFileSync(path.join(__dirname,"emailTemplates","resetPassword.html"), 'utf8');
             var handlebarsTemplate = handlebars.compile(html);
             var Code = Math.floor(Math.random() * 10000);
-            data.insert({email:email,code:Code,type:"Password Reset",date:new Date().getTime()});
+            data.insert({email:email,code:Code,type:"Password Reset",date:new Date().getTime()}, function (err, newDoc) {   // Callback is optional
+                console.log(newDoc);
+              });
             var handlebarsObj = {
                 title:"Password reset From Hero!",
                 fullname:user.name,
