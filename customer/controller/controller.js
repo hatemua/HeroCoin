@@ -261,9 +261,8 @@ exports.LostPassword = async(req,res)=>{
     console.log(code);
     var key = email+"+-*/"+newPassword;
     try{
-        let codeDoc = await data.asyncFindOne({code:code});
-        let codeDoc1 = await data.asyncFindOne({});
-        console.log(codeDoc1);
+        let codeDoc = await data.asyncFind({code:code,email:email});
+        console.log(codeDoc);
         if(codeDoc != null){
             console.log("Invalid code check your email !");
             return res.status(400).json("Invalid code check your email !");
