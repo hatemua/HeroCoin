@@ -270,11 +270,11 @@ exports.LostPassword = async(req,res)=>{
          }
         )
         console.log(codeDoc.length);
-        if(codeDoc != null){
+        if(codeDoc.length == 0){
             console.log("Invalid code check your email !");
             return res.status(400).json("Invalid code check your email !");
         }
-        const validtime = codeDoc.date+3600;
+        const validtime = codeDoc[0].date+3600;
         const currentDate = new Date().getTime();
         if(validtime> currentDate){
             console.log("Session closed !");
