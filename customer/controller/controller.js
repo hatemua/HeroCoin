@@ -262,7 +262,10 @@ exports.LostPassword = async(req,res)=>{
     var key = email+"+-*/"+newPassword;
     try{
 
-        const codeDoc = data.find({code:parseInt(code),email:email});
+        const codeDoc = data.find({code:parseInt(code),email:email},function(err,doc)
+        {
+            return Promise.all(doc);
+        })
         console.log(codeDoc);
         if(codeDoc != null){
             console.log("Invalid code check your email !");
