@@ -261,10 +261,9 @@ exports.LostPassword = async(req,res)=>{
     console.log(code);
     var key = email+"+-*/"+newPassword;
     try{
-        let codeDoc = data.find({code:code,email:email}, function (err, newDoc) {   // Callback is optional
+        let codeDoc = data.find({code:parseInt(code),email:email}, function (err, newDoc) {   // Callback is optional
             console.log(newDoc);
           });
-        let codeDoc1 = data.find({});
         console.log(codeDoc);
         console.log(codeDoc1);
         if(codeDoc != null){
