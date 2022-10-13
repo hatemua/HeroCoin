@@ -66,7 +66,7 @@ const HEADER_ROW = [
 exports.createSession = async(req,res,next)=>{
   // const {mode,customerId,amount,idActivist}= req.body; for later changement
   const {mode,customerId,amount,grName,source}= req.body;
-  console.log(source);
+  console.log(req.body);
   //{price:  req.body.priceId, quantity: 1}
   const domainFront="https://herocircle.app"
   const domainBack="https://hegemony.donftify.digital:8080"
