@@ -66,7 +66,7 @@ const HEADER_ROW = [
 exports.createSession = async(req,res,next)=>{
   // const {mode,customerId,amount,idActivist}= req.body; for later changement
   const {mode,customerId,amount,grName,source}= req.body;
-  console.log(req.body);
+ 
   //{price:  req.body.priceId, quantity: 1}
   let domainFront="https://herocircle.app"
   let domainBack="https://hegemony.donftify.digital:8080"
@@ -81,6 +81,7 @@ exports.createSession = async(req,res,next)=>{
   {
     cancel_url=domainFront+"/circleLanding:"+grName
   }
+  console.log(cancel_url);
   try{
     await initDriver();
     var driver = getdriver();
