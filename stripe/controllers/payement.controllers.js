@@ -79,7 +79,7 @@ exports.createSession = async(req,res,next)=>{
   let cancel_url=domainFront+"/circle-feed"
   if(source)
   {
-    cancel_url=domainFront+"/circleLanding"+grName
+    cancel_url=domainFront+"/circleLanding"+grName.replace(" ","%20")
   }
   console.log(cancel_url);
   try{
@@ -100,7 +100,7 @@ exports.createSession = async(req,res,next)=>{
   console.log(priceId);
     const session = await stripe.checkout.sessions.create({
       success_url: `${domainBack}/success?session_id={CHECKOUT_SESSION_ID}&grName=${grName}&source=${domainFront}`,
-      cancel_url: `${cancel_url.replace(" ","%20")}`,
+      cancel_url: `${cancel_url}`,
       line_items: [{
         price:priceId,
         quantity:1
