@@ -79,7 +79,7 @@ exports.createSession = async(req,res,next)=>{
   let cancel_url=domainFront+"/circle-feed"
   if(source)
   {
-    cancel_url=domainFront+"/circleLanding"+grName.replace(" ","%20")
+    cancel_url=domainFront+"/circleLanding"+grName.replace(/ /g,"%20")
   }
   console.log(cancel_url);
   try{
