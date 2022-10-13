@@ -99,7 +99,7 @@ exports.createSession = async(req,res,next)=>{
   console.log(priceId);
     const session = await stripe.checkout.sessions.create({
       success_url: `${domainBack}/success?session_id={CHECKOUT_SESSION_ID}&grName=${grName}&source=${domainFront}`,
-      cancel_url: `${cancel_url}/circle-feed`,
+      cancel_url: `${cancel_url}`,
       line_items: [{
         price:priceId,
         quantity:1
