@@ -65,8 +65,21 @@ const HEADER_ROW = [
 ]
 exports.createSession = async(req,res,next)=>{
   // const {mode,customerId,amount,idActivist}= req.body; for later changement
-  const {mode,customerId,amount,grName}= req.body;
+  const {mode,customerId,amount,grName,source}= req.body;
   //{price:  req.body.priceId, quantity: 1}
+  const domainFront="https://herocircle.app"
+  const domainBack="https://hegemony.donftify.digital:8080"
+
+  if(source)
+  {
+    domainFront="https://hegemony.donftify.digital:3000";
+    domainBack="https://hegemony.donftify.digital:8082";
+  }
+  const cancel_url=domainFront+"/circle-feed"
+  if(source)
+  {
+    cancel_url=domainFront+"circleLanding:"+grName
+  }
   try{
     await initDriver();
     var driver = getdriver();
@@ -84,8 +97,8 @@ exports.createSession = async(req,res,next)=>{
     const priceId = await getPriceId(amount);
   console.log(priceId);
     const session = await stripe.checkout.sessions.create({
-      success_url: `${process.env.DOMAIN}8080/success?session_id={CHECKOUT_SESSION_ID}&grName=${grName}`,
-      cancel_url: `https://herocircle.app/circle-feed`,
+      success_url: `${domainBack}/success?session_id={CHECKOUT_SESSION_ID}&grName=${grName}&source=${domainFront}`,
+      cancel_url: `${domainFront}/circle-feed`,
       line_items: [{
         price:priceId,
         quantity:1
@@ -110,7 +123,12 @@ exports.successPage = async (req, res) => {
   // const session = await stripe.checkout.sessions.retrieve(req.query.session_id);
  
   // return res.status(200).json(session);
-  const {grName}= req.query;
+  const {grName,source}= req.query;
+  const url="https://herocircle.app";
+  if(source)
+  {
+    url=source;
+  }
   const sessione = await stripe.checkout.sessions.retrieve(req.query.session_id);
   console.log(sessione)
   await initDriver();
@@ -176,7 +194,7 @@ sendEmail({
   });
 
   
-  return res.redirect('https://herocircle.app/welcome-circle:'+grName.replace(":",""));
+  return res.redirect(url+'/welcome-circle:'+grName.replace(":",""));
 
 }
 
