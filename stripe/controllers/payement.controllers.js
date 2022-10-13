@@ -68,15 +68,15 @@ exports.createSession = async(req,res,next)=>{
   const {mode,customerId,amount,grName,source}= req.body;
   console.log(req.body);
   //{price:  req.body.priceId, quantity: 1}
-  const domainFront="https://herocircle.app"
-  const domainBack="https://hegemony.donftify.digital:8080"
+  let domainFront="https://herocircle.app"
+  let domainBack="https://hegemony.donftify.digital:8080"
 
   if(source !== undefined)
   {
     domainFront="https://hegemony.donftify.digital:3000";
     domainBack="https://hegemony.donftify.digital:8082";
   }
-  const cancel_url=domainFront+"/circle-feed"
+  let cancel_url=domainFront+"/circle-feed"
   if(source !== undefined)
   {
     cancel_url=domainFront+"circleLanding:"+grName
