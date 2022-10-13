@@ -79,7 +79,7 @@ exports.createSession = async(req,res,next)=>{
   let cancel_url=domainFront+"/circle-feed"
   if(source !== undefined)
   {
-    cancel_url=domainFront+"circleLanding:"+grName
+    cancel_url=domainFront+"/circleLanding:"+grName
   }
   try{
     await initDriver();
