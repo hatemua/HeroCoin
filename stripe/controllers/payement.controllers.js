@@ -66,17 +66,18 @@ const HEADER_ROW = [
 exports.createSession = async(req,res,next)=>{
   // const {mode,customerId,amount,idActivist}= req.body; for later changement
   const {mode,customerId,amount,grName,source}= req.body;
+  console.log(source);
   //{price:  req.body.priceId, quantity: 1}
   const domainFront="https://herocircle.app"
   const domainBack="https://hegemony.donftify.digital:8080"
 
-  if(source)
+  if(source !== undefined)
   {
     domainFront="https://hegemony.donftify.digital:3000";
     domainBack="https://hegemony.donftify.digital:8082";
   }
   const cancel_url=domainFront+"/circle-feed"
-  if(source)
+  if(source !== undefine)
   {
     cancel_url=domainFront+"circleLanding:"+grName
   }
@@ -98,7 +99,7 @@ exports.createSession = async(req,res,next)=>{
   console.log(priceId);
     const session = await stripe.checkout.sessions.create({
       success_url: `${domainBack}/success?session_id={CHECKOUT_SESSION_ID}&grName=${grName}&source=${domainFront}`,
-      cancel_url: `${domainFront}/circle-feed`,
+      cancel_url: `${cancel_url}/circle-feed`,
       line_items: [{
         price:priceId,
         quantity:1
