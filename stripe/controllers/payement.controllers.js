@@ -77,7 +77,7 @@ exports.createSession = async(req,res,next)=>{
     domainBack="https://hegemony.donftify.digital:8082";
   }
   const cancel_url=domainFront+"/circle-feed"
-  if(source !== undefine)
+  if(source !== undefined)
   {
     cancel_url=domainFront+"circleLanding:"+grName
   }
