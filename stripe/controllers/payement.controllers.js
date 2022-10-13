@@ -71,13 +71,13 @@ exports.createSession = async(req,res,next)=>{
   let domainFront="https://herocircle.app"
   let domainBack="https://hegemony.donftify.digital:8080"
 
-  if(source !== undefined)
+  if(source)
   {
     domainFront="https://hegemony.donftify.digital:3000";
     domainBack="https://hegemony.donftify.digital:8082";
   }
   let cancel_url=domainFront+"/circle-feed"
-  if(source !== undefined)
+  if(source)
   {
     cancel_url=domainFront+"/circleLanding"+grName
   }
