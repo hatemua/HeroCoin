@@ -71,7 +71,7 @@ exports.getGroupe = async(req,res,next)=>{
     myCache.set("Get-Group",node.properties);
     return res.status(200).json(node.properties);
 }
-exports.getMembers = async(req,res,next)=>{
+exports.getMembers = async(req,res)=>{
     const grName = req.params.grName;
     await initDriver();
     var driver = getdriver();
